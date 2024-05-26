@@ -1,0 +1,57 @@
+<div.wrapper>
+  <span.time-item>${state.days}</span>:
+  <span.time-item>${state.hours}</span>:
+  <span.time-item>${state.minutes}</span>:
+  <span.time-item>${state.seconds}</span>
+</div>
+
+class {
+  onCreate(props) {
+    this.state = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    }
+
+    const now = new Date()
+    const {start} = props
+    
+    if(!start){
+      console.error('There is no start param!');
+      return
+    }
+
+    let delta = start - now
+
+    if(delta < 0){
+      console.error('The start time must be greater than now!');
+      return
+    }
+
+    this.calculateTime(delta)
+  }
+
+  calculateTime(time) {
+    this.state.days = parseInt(time / (60*60*24*1000));
+    this.state.hours = parseInt(time / (60*60*1000) % 24);
+    this.state.minutes = parseInt(time / (60*1000) % 60);
+    this.state.seconds = parseInt(time / 1000 % 60);
+
+    setTimeout(() => {
+      this.calculateTime(time - 1000)
+    }, 1000)
+  }
+}
+
+style.less {
+  .wrapper {
+    color: #fff;
+    padding: 2rem;
+
+    .time-item {
+      display: inline-block;
+      margin-left: .5rem;
+    }
+  }
+}

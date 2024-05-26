@@ -1,0 +1,93 @@
+$ const items = [
+  {
+    title: 'title1',
+    subtitle: 'subtitle1XXXXXXXXXXX'
+  },
+   {
+    title: 'title2',
+    subtitle: 'subtitle2XXXXXXXXXXX'
+  },
+   {
+    title: 'title3',
+    subtitle: 'subtitle3XXXXXXXXXXX'
+  }
+]
+
+<section.container>
+  <ebay-header />
+  <main.main>
+    <div.side>
+      <div.top />
+      <div.items>
+        <for|item| of=items>
+          <div.item>
+            <p.title>${item.title}</p>
+            <p.subtitle>${item.subtitle}</p>
+          </div>
+        </for>
+      </div>
+    </div>
+    <div.content />
+  </main>
+</section>
+
+style.less {
+  .container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    margin-top: 1rem;
+    
+    > div{
+      width: 50%;
+      height: 20rem;
+    }
+
+    .side{
+      .top{
+        background: #0433a0;
+        height: 3rem;
+      }
+
+      .items{
+        padding: 2rem 1rem;
+
+        .item{
+          margin-bottom: 1rem;
+
+          .title{
+            font-weight: bold;
+            font-size: 1.4rem;
+          }
+
+          .subtitle{
+            font-size: 1rem;
+            color: #666;
+            margin-top: .3rem;
+          }
+        }
+      }
+    }
+
+    .content{
+      background: #0d1940;
+    }
+  }
+
+
+  @media screen and (max-width: 480px) {
+    .main{
+      flex-direction: column;
+
+      > div{
+        width: 100%;
+      }
+    }
+    
+  }
+}
